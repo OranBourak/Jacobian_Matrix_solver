@@ -82,17 +82,6 @@ def rearangeDominantDiagonal(matrix):
     return True
 
 
-def check_Dominant_Diagonal(matrix):
-    '''
-    :return: if matrix is Diagonal dominant returns true, else returns false.
-    '''
-    n, m = find_matrix_size(matrix)
-    for row in range(n):
-        if abs(sum(matrix[row][:-1]) - matrix[row][row]) > matrix[row][row]:
-            return False
-    return True
-
-
 def find_matrix_size(mat):
     """
     Finds the matrix size
