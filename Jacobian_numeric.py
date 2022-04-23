@@ -59,7 +59,15 @@ def buildEquationsList(matrix):
     return equation_list
 
 
-def rearangeDominantDiagnal(matrix):
+def rearangeDominantDiagonal(matrix):
+    '''
+    rearangeDominantDiagonal - defines check_row function which takes pivot and row and checks if pivot in the same row equal or bigger than all elements
+    in the same row for every row
+    if check_row fails for a row, we check the next row and switch if the condition is met.
+    if we reach last row and the condition is not met returns.
+    :param matrix: matrix of size nXm where m = n+1 of the form (A|b)
+    :return: true if diagonal dominant, false otherwise.
+    '''
     n, m = find_matrix_size(matrix)
     check_row = lambda pivot, row: abs(pivot) >= sum(map(abs, matrix[row])) - abs(pivot) - abs(matrix[row][m - 1])
     for row in range(n):
@@ -113,3 +121,5 @@ def exchange(matrix, row, row2):
 
 # print(jacobian_solver([[4, 2, 0, 2], [2, 10, 4, 6], [0, 4, 5, 5]], 0.000001))
 print(jacobian_solver([[-1, 2, 4, 0], [1, -3, 2, 0], [3, -2, 1, 0]], 0.000001))
+
+
