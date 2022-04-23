@@ -11,8 +11,9 @@ def jacobian_solver(matrix, epsilon):
     maxLoops = None
 
     if not rearangeDominantDiagonal(matrix):  # Indicator for diagonally dominant matrix
-        print("Matrix is no diagonally dominant.")
+        print("Warning: Matrix is no diagonally dominant.")
         maxLoops = 100
+        print(f"Setting max iterations to: {maxLoops}")
     values = [0 for x in range(m)]
 
     equations = buildEquationsList(matrix)  # Build equations form matrix
@@ -30,11 +31,15 @@ def jacobian_solver(matrix, epsilon):
             j += 1
         for i in range(n):
             if abs(values[i] - values2[i]) <= epsilon:
+                if maxLoops is not None:
+                    print("למרות שאין אלכסון דומיננטי התוצאות הם : ")
+                else:
+                    print("פתרון המטריצה: ")
                 return values2[0:-1]
         values = list(values2)  # Update X_r to X_r1
         print(values2[:-1])
         if maxLoops == 0:
-            print("The matrix ....")
+            print("המערכת אינה מתכנסת")
             return
 
 
@@ -109,7 +114,7 @@ def exchange(matrix, row, row2):
 
 # print(jacobian_solver([[4, 2, 0, 2], [2, 10, 4, 6], [0, 4, 5, 5]], 0.000001))
 # print(jacobian_solver([[-1, 2, 4, 0], [1, -3, 2, 0], [3, -2, 1, 0]], 0.000001))
-print(jacobian_solver([[7, -3, 1, 10], [2, 8, 3, 12], [4, 5, -9, 20]], 0.000001))
+# print(jacobian_solver([[7, -3, 1, 10], [2, 8, 3, 12], [4, 5, -9, 20]], 0.000001))
 
 
 def mergeMetrix(matrix, vector):
