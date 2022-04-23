@@ -10,16 +10,15 @@ def jacobian_solver(matrix, epsilon):
     n, m = find_matrix_size(matrix)
     maxLoops = None
 
-    if not rearangeDominantDiagonal(matrix): # Indicator for diagonally dominant matrix
+    if not rearangeDominantDiagonal(matrix):  # Indicator for diagonally dominant matrix
         print("Matrix is no diagonally dominant.")
         maxLoops = 100
     values = [0 for x in range(m)]
 
     equations = buildEquationsList(matrix)  # Build equations form matrix
 
-
     while True:
-        if maxLoops is not None: # maxLoop== None --> the matrix have dominant diagonal
+        if maxLoops is not None:  # maxLoop== None --> the matrix have dominant diagonal
             maxLoops -= 1
         j = 0
         values2 = list(values)
@@ -31,7 +30,7 @@ def jacobian_solver(matrix, epsilon):
             j += 1
         for i in range(n):
             if abs(values[i] - values2[i]) <= epsilon:
-               return values2[0:-1]
+                return values2[0:-1]
         values = list(values2)  # Update X_r to X_r1
         print(values2[:-1])
         if maxLoops == 0:
@@ -49,7 +48,7 @@ def buildEquationsList(matrix):
     :param matrix: (A|b) matrix from which the equations are extracted
     :return: Equations List
     '''
-    i = 0 # pivot
+    i = 0  # pivot
     equation_list = list()
     for row in matrix:
         equation = [0 if x == i else -(row[x] / row[i]) for x in range(len(row))]
@@ -120,8 +119,31 @@ def exchange(matrix, row, row2):
 
 
 # print(jacobian_solver([[4, 2, 0, 2], [2, 10, 4, 6], [0, 4, 5, 5]], 0.000001))
-#print(jacobian_solver([[-1, 2, 4, 0], [1, -3, 2, 0], [3, -2, 1, 0]], 0.000001))
+# print(jacobian_solver([[-1, 2, 4, 0], [1, -3, 2, 0], [3, -2, 1, 0]], 0.000001))
 print(jacobian_solver([[7, -3, 1, 10], [2, 8, 3, 12], [4, 5, -9, 20]], 0.000001))
 
 
+def mergeMetrix(matrix, vector):
+    """
+    Combines the matrix and the vector into one single matrix with free values
+    (   4   2   0   )   (   2   )       (   4   2   0   |   2   )
+    (   2   10  4   ) + (   6   )   =   (   2   10  4   |   6   )
+    (   0   4   5   )   (   5   )       (   0   4   5   |   5   )
+    :param matrix: n * n matrix
+    :param vector: vector n * 1
+    :return: n * n + 1 matrix
+    """
+    mat = []
+    for i in range(len(vector)):
+        row = []
+        for j in range(len(matrix[i])):
+            row.append(matrix[i][j])
+        row.append(vector[i][0])
+        mat.append(row)
+    return mat
 
+
+if __name__ == '__main__':
+    matrixA = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
+    vectorB = [[2], [6], [5]]
+    print(jacobian_solver(mergeMetrix(matrixA, vectorB), 0.000001))
