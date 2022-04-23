@@ -3,8 +3,8 @@ def jacobian_solver(matrix, epsilon):
     jacobinal_solver - takes matrix and precision point and iterates with starting guess of 0's in all variables and uses the answer as the next guess
     uses rearageDominantDiagonal, buildEquationList
     Set maxLoops to 100 incase matrix is not diagonally dominant.
-    :param matrix:
-    :param epsilon:
+    :param matrix:(A|b) matrix
+    :param epsilon: Result precision
     :return:
     '''
     n, m = find_matrix_size(matrix)
