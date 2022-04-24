@@ -27,7 +27,7 @@ def gauss_seidel_solver(matrix,epsilon):
                     print("Matrix solution: ")
                 return values[0:-1]
         if maxLoops == 0:
-            print("The system does not converge. ")
+            print("The system does not converge.. ")
             return
 
 
