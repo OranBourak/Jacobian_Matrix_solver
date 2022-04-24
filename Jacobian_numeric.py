@@ -32,14 +32,14 @@ def jacobian_solver(matrix, epsilon):
         for i in range(n):
             if abs(values[i] - values2[i]) <= epsilon:
                 if maxLoops is not None:
-                    print("למרות שאין אלכסון דומיננטי התוצאות הם : ")
+                    print("Although there is no dominant diagonal the results are : ")
                 else:
-                    print("פתרון המטריצה: ")
+                    print("Matrix solution: ")
                 return values2[0:-1]
         values = list(values2)  # Update X_r to X_r1
         print(values2[:-1])
         if maxLoops == 0:
-            print("המערכת אינה מתכנסת")
+            print("The system does not converge.")
             return
 
 
