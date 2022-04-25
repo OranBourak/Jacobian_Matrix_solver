@@ -16,7 +16,7 @@ def gauss_seidel_solver(matrix,epsilon):
         temp_list = list(values)
         for i in range(m - 1): # []
             values[i] = sum([values[j]*equations[i][j] for j in range(m-1)])
-            values[i] +=equations[i][-1]
+            values[i] += equations[i][-1]
 
         print(values)
         for i in range(m-1):
@@ -25,9 +25,9 @@ def gauss_seidel_solver(matrix,epsilon):
                     print("Although there is no dominant diagonal the results are : ")
                 else:
                     print("Matrix solution: ")
-                return values[0:-1]
+                return values
         if maxLoops == 0:
-            print("The system does not converge.. ")
+            print("The system does not converge. ")
             return
 
 
