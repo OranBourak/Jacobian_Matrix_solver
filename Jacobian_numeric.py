@@ -12,7 +12,7 @@ def jacobian_solver(matrix, epsilon):
 
     if not rearangeDominantDiagonal(matrix):  # Indicator for diagonally dominant matrix
         print("Warning: Matrix is no diagonally dominant.")
-        maxLoops = 1000
+        maxLoops = 100
         print(f"Setting max iterations to: {maxLoops}")
     values = [0 for x in range(m)]
 
