@@ -1,8 +1,9 @@
 from Jacobian_numeric import *
 
 
-def gauss_seidel_solver(matrix,epsilon):
+def successive_Over_Relaxation(matrix, epsilon):
     n, m = find_matrix_size(matrix)
+    w = 1.16
     maxLoops = None
     if not rearangeDominantDiagonal(matrix):
         print("Matrix is not diagonally dominant")
@@ -16,8 +17,8 @@ def gauss_seidel_solver(matrix,epsilon):
             maxLoops -=1
         temp_list = list(values)
         for i in range(m - 1): # []
-            values[i] = sum([values[j]*equations[i][j] for j in range(m-1)])
-            values[i] += equations[i][-1]
+            values[i] = (sum([values[j]*equations[i][j] for j in range(m-1)]) + equations[i][-1]) * w + (1-w) * values[i]
+            values[i]
         print(values)
         for i in range(m-1):
             if abs(temp_list[i] - values[i]) <= epsilon:
@@ -30,7 +31,4 @@ def gauss_seidel_solver(matrix,epsilon):
         if maxLoops == 0:
             print("The system does not converge. ")
             return
-
-
-
 
