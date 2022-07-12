@@ -31,6 +31,9 @@ def jacobian_solver(matrix, epsilon):
                 values2[j] += equation[i] * values[i]
             values2[j] += equation[-1]  # Adds the b vector element
             j += 1
+        with open('data_jacobi.csv', 'a') as f:
+            writer = csv.writer(f)
+            writer.writerow(values2[:-1])
         for i in range(n):
             if abs(values[i] - values2[i]) <= epsilon:
                 if maxLoops is not None:
@@ -39,9 +42,6 @@ def jacobian_solver(matrix, epsilon):
                     print("Matrix solution: ")
                 return values2[0:-1]
         values = list(values2)  # Update X_r to X_r1
-        with open('data_jacobi.csv', 'a') as f:
-            writer = csv.writer(f)
-            writer.writerow(values2[:-1])
         print(values2[:-1])
         if maxLoops == 0:
             print("The system does not converge.")
