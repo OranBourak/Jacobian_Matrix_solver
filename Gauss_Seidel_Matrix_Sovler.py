@@ -1,5 +1,5 @@
 import csv
-from Jacobian_numeric import *
+from GeneralMethods import *
 
 
 def gauss_seidel_solver(matrix,epsilon):

@@ -1,5 +1,6 @@
-from Gauss_Seidel_Matrix_Sovler import *
+from Jacobian_numeric import *
 from SOR import *
+from Gauss_Seidel_Matrix_Sovler import *
 
 if __name__ == '__main__':
     method = int(input("Hello ! in which method would you like to solve ? \n 1. Jacobi method \n 2. SOR method. \n 3. Gauss-Seidel method.\n"))

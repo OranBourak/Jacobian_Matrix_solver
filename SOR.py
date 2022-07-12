@@ -1,5 +1,5 @@
-from Jacobian_numeric import *
-
+from GeneralMethods import *
+import csv
 
 def successive_Over_Relaxation(matrix, epsilon, w=1.16):
     """
