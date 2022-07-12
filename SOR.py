@@ -10,6 +10,9 @@ def successive_Over_Relaxation(matrix, epsilon, w=1.16):
     :param w: relaxation factor
     :return: Solution for the matrix
     """
+    if w > 2 or w < 1:
+        print("ERROR: The relaxation factor is not in range (1-2)")
+        return
     n, m = find_matrix_size(matrix)
     maxLoops = None
     if not rearangeDominantDiagonal(matrix):
