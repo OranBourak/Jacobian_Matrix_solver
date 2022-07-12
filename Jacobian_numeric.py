@@ -1,3 +1,5 @@
+import csv
+
 def jacobian_solver(matrix, epsilon):
     '''
     jacobinal_solver - takes matrix and precision point and iterates with starting guess of 0's in all variables and uses the answer as the next guess
@@ -37,6 +39,9 @@ def jacobian_solver(matrix, epsilon):
                     print("Matrix solution: ")
                 return values2[0:-1]
         values = list(values2)  # Update X_r to X_r1
+        with open('data_jacobi.csv', 'a') as f:
+            writer = csv.writer(f)
+            writer.writerow(values2[:-1])
         print(values2[:-1])
         if maxLoops == 0:
             print("The system does not converge.")

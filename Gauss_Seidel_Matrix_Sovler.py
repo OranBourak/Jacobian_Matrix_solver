@@ -1,3 +1,4 @@
+import csv
 from Jacobian_numeric import *
 
 
@@ -18,13 +19,16 @@ def gauss_seidel_solver(matrix,epsilon):
         for i in range(m - 1): # []
             values[i] = sum([values[j]*equations[i][j] for j in range(m-1)])
             values[i] += equations[i][-1]
+        with open('data_gaus.csv', 'a') as f:
+            writer = csv.writer(f)
+            writer.writerow(values)
         print(values)
         for i in range(m-1):
             if abs(temp_list[i] - values[i]) <= epsilon:
                 if maxLoops is not None:
                     print("Although there is no dominant diagonal the results are : ")
                 else:
-                    print(loops)
+                    print(f'Num of iterations : {loops}')
                     print("Matrix solution: ")
                 return values
         if maxLoops == 0:
